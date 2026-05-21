@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="content-language" content="ko">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>퍼플랩스헬스케어 - 홈페이지</title>
+<meta name="description" content="퍼플랩스헬스케어 홈페이지입니다.">
+<meta property="og:title" content="뷰티셀렉션 - 홈페이지">
+<meta property="og:description" content="뷰티셀렉션 홈페이지입니다.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="뷰티셀렉션 - 홈페이지">
+
+<!-- 폰트: Pretendard (원본과 동일) -->
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+
+<style>
+/* =========================================================
+   뷰티셀렉션 홈페이지 (재현본)
+   - 이미지 영역은 모두 더미 플레이스홀더입니다.
+     .img-ph 박스를 <img src="..."> 로 교체하면 됩니다.
+   - 색상/폰트/문구/레이아웃은 원본과 동일하게 구성했습니다.
+   ========================================================= */
+
+:root{
+  --c-dark:#1B212C;      /* 제목/주요 텍스트 */
+  --c-body:#505766;      /* 본문 텍스트 */
+  --c-muted:#AFB5C2;     /* 보조 텍스트 */
+  --c-line:#E9E9F0;      /* 구분선 */
+  --c-accent:#E58D86;    /* 브랜드 코랄 */
+  --c-accent-2:#e27d7d;
+  --c-bg:#FFFFFF;
+  --c-bg-soft:#FAFAFA;
+  --content:1200px;      /* 콘텐츠 최대 폭 */
+  --gap:24px;            /* 2단 컬럼 간격 */
+  --header-h:72px;
+}
+
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  font-family:"Pretendard","Pretendard Variable",-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+  color:var(--c-dark);
+  background:var(--c-bg);
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit;text-decoration:none;}
+img{display:block;max-width:100%;}
+
+/* ---------- 더미 이미지 플레이스홀더 ---------- */
+.img-ph{
+  position:relative;
+  width:100%;
+  background:
+    repeating-linear-gradient(45deg,#f4f5f7 0,#f4f5f7 14px,#eef0f3 14px,#eef0f3 28px);
+  border:1px dashed #c9cdd6;
+  border-radius:6px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  color:#9aa1ad;
+  overflow:hidden;
+}
+.img-ph .ph-title{font-size:16px;font-weight:700;letter-spacing:.02em;color:#7c828f;}
+.img-ph .ph-sub{font-size:13px;margin-top:6px;color:#aab0bb;}
+.img-ph .ph-tag{
+  position:absolute;top:12px;left:12px;
+  font-size:11px;font-weight:600;
+  background:rgba(27,33,44,.55);color:#fff;
+  padding:3px 8px;border-radius:4px;letter-spacing:.02em;
+}
+
+/* ---------- 헤더 ---------- */
+header.site-header{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  height:var(--header-h);
+  background:rgba(255,255,255,.92);
+  backdrop-filter:saturate(180%) blur(8px);
+  border-bottom:1px solid var(--c-line);
+}
+.header-inner{
+  max-width:var(--content);height:100%;margin:0 auto;
+  padding:0 24px;display:flex;align-items:center;justify-content:space-between;
+}
+/* 로고 (이미지 교체 가능) */
+.logo{display:flex;align-items:center;height:100%;}
+.logo .logo-ph{
+  display:flex;align-items:center;gap:8px;
+  font-size:22px;font-weight:800;letter-spacing:-.01em;color:var(--c-dark);
+}
+.logo .logo-mark{
+  width:26px;height:26px;border-radius:50%;
+  background:linear-gradient(135deg,var(--c-accent),var(--c-accent-2));
+}
+nav.gnb{display:flex;align-items:center;gap:34px;}
+nav.gnb .menu{
+  font-size:15px;font-weight:600;color:var(--c-dark);
+  padding:6px 0;position:relative;cursor:pointer;white-space:nowrap;
+}
+nav.gnb .menu:hover{color:var(--c-accent);}
+nav.gnb .menu.has-caret::after{
+  content:"";display:inline-block;width:7px;height:7px;margin-left:6px;
+  border-right:1.6px solid currentColor;border-bottom:1.6px solid currentColor;
+  transform:rotate(45deg) translateY(-2px);vertical-align:middle;
+}
+.dropdown{position:relative;}
+.dropdown .dd-panel{
+  position:absolute;top:140%;left:50%;transform:translateX(-50%);
+  background:#fff;border:1px solid var(--c-line);border-radius:8px;
+  box-shadow:0 12px 30px rgba(0,0,0,.08);
+  min-width:160px;padding:8px 0;opacity:0;visibility:hidden;
+  transition:.15s ease;
+}
+.dropdown:hover .dd-panel{opacity:1;visibility:visible;top:120%;}
+.dropdown .dd-panel a{display:block;padding:10px 18px;font-size:14px;color:var(--c-body);white-space:nowrap;}
+.dropdown .dd-panel a:hover{background:var(--c-bg-soft);color:var(--c-accent);}
+
+.header-actions{display:flex;align-items:center;}
+.lang{
+  display:flex;align-items:center;gap:6px;
+  font-size:14px;font-weight:600;color:var(--c-dark);
+  border:1px solid var(--c-line);border-radius:8px;padding:7px 12px;cursor:pointer;
+}
+.lang:hover{border-color:var(--c-accent);color:var(--c-accent);}
+.lang .globe{width:16px;height:16px;border-radius:50%;border:1.6px solid currentColor;position:relative;}
+.lang .globe::before,.lang .globe::after{content:"";position:absolute;background:currentColor;}
+.lang .globe::before{left:50%;top:1px;bottom:1px;width:1.4px;transform:translateX(-50%);}
+.lang .globe::after{top:50%;left:1px;right:1px;height:1.4px;transform:translateY(-50%);}
+.lang .caret{width:6px;height:6px;border-right:1.4px solid currentColor;border-bottom:1.4px solid currentColor;transform:rotate(45deg);}
+
+/* 모바일 메뉴 토글 */
+.nav-toggle{display:none;flex-direction:column;gap:5px;background:none;border:0;cursor:pointer;padding:8px;}
+.nav-toggle span{width:22px;height:2px;background:var(--c-dark);display:block;}
+
+/* ---------- 레이아웃 공통 ---------- */
+main{padding-top:var(--header-h);}
+.section{padding:96px 24px;}
+.container{max-width:var(--content);margin:0 auto;}
+.eng-tagline{
+  font-size:38px;font-weight:800;line-height:1.25;letter-spacing:-.01em;color:var(--c-dark);
+}
+.kr-heading{font-size:28px;font-weight:700;line-height:1.4;color:var(--c-dark);}
+.body-text{font-size:18px;line-height:1.85;color:var(--c-body);}
+.body-text.muted{color:var(--c-muted);}
+
+/* CTA 버튼 */
+.btn{
+  display:inline-flex;align-items:center;gap:10px;
+  font-size:16px;font-weight:600;color:#fff;
+  background:var(--c-accent);
+  padding:14px 28px;border-radius:999px;
+  transition:.2s ease;cursor:pointer;border:0;
+}
+.btn:hover{background:var(--c-accent-2);transform:translateY(-1px);}
+.btn .arrow{width:7px;height:7px;border-right:2px solid #fff;border-top:2px solid #fff;transform:rotate(45deg);}
+
+/* ---------- HERO (메인 - 1) ---------- */
+.hero{padding-top:0;}
+/* 풀블리드 배너 (원본: 컨테이너보다 넓은 배너) */
+.hero-banner{width:100%;}
+.hero-banner .img-ph{aspect-ratio:1765/720;border-radius:0;border-left:0;border-right:0;}
+.hero-text{max-width:860px;margin:0 auto;text-align:center;padding:80px 24px 0;}
+.hero-text .hero-title{font-size:42px;font-weight:800;line-height:1.35;color:var(--c-dark);letter-spacing:-.01em;}
+.hero-text .hero-sub{font-size:24px;font-weight:700;line-height:1.5;color:var(--c-dark);margin-top:48px;}
+.hero-text .hero-body{font-size:18px;line-height:1.85;color:var(--c-body);margin-top:24px;}
+.hero-text .hero-eng{font-size:28px;font-weight:800;line-height:1.4;color:var(--c-dark);margin-top:56px;}
+.hero-text .hero-eng .kr{display:block;font-size:18px;font-weight:600;color:var(--c-body);margin-top:14px;}
+
+/* ---------- 2단 섹션 (이미지 + 텍스트) ---------- */
+.split{display:flex;gap:var(--gap);align-items:center;}
+.split .col{width:calc(50% - (var(--gap)/2));}
+.split .col.media .img-ph{aspect-ratio:4/3;}
+.split .col.copy .kr-heading,
+.split .col.copy .eng-tagline{margin:0;}
+.split .col.copy .body-text{margin-top:22px;}
+.split .col.copy .btn{margin-top:34px;}
+.section.alt{background:var(--c-bg-soft);}
+
+/* ---------- 푸터 ---------- */
+footer.site-footer{background:#fff;border-top:1px solid var(--c-line);padding:56px 24px 64px;}
+.footer-inner{max-width:var(--content);margin:0 auto;}
+.footer-top{display:flex;gap:28px;align-items:flex-start;}
+.footer-logo .logo-ph{font-size:20px;font-weight:800;color:var(--c-dark);display:flex;align-items:center;gap:8px;}
+.footer-logo .logo-mark{width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,var(--c-accent),var(--c-accent-2));}
+.footer-info{margin-top:18px;}
+.footer-info .f-title{font-size:15px;font-weight:700;color:var(--c-dark);}
+.footer-info .f-desc{font-size:14px;color:var(--c-muted);margin-top:10px;line-height:1.9;}
+.footer-info .f-desc p{margin:0;}
+.footer-divider{height:1px;background:var(--c-line);margin:32px 0;}
+.footer-bottom{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:18px;}
+.footer-menu{display:flex;align-items:center;gap:6px;font-size:14px;font-weight:600;color:var(--c-body);cursor:pointer;}
+.footer-menu .caret{width:6px;height:6px;border-right:1.4px solid currentColor;border-bottom:1.4px solid currentColor;transform:rotate(45deg);}
+.sns{display:flex;gap:12px;}
+.sns a{
+  width:38px;height:38px;border-radius:50%;border:1px solid var(--c-line);
+  display:flex;align-items:center;justify-content:center;color:var(--c-muted);
+  font-size:11px;font-weight:700;
+}
+.sns a:hover{border-color:var(--c-accent);color:var(--c-accent);}
+
+/* ---------- 맨 위로 버튼 ---------- */
+.to-top{
+  position:fixed;right:28px;bottom:28px;z-index:900;
+  width:48px;height:48px;border-radius:50%;
+  background:#fff;border:1px solid var(--c-line);box-shadow:0 6px 18px rgba(0,0,0,.08);
+  display:flex;align-items:center;justify-content:center;cursor:pointer;
+}
+.to-top .up{width:10px;height:10px;border-top:2px solid var(--c-dark);border-left:2px solid var(--c-dark);transform:rotate(45deg);margin-top:3px;}
+.to-top:hover{border-color:var(--c-accent);}
+.to-top:hover .up{border-color:var(--c-accent);}
+
+/* ---------- 반응형 ---------- */
+@media (max-width:900px){
+  nav.gnb,.lang{display:none;}
+  .nav-toggle{display:flex;}
+  .section{padding:64px 20px;}
+  .split{flex-direction:column;}
+  .split .col{width:100%;}
+  .hero-text{padding-top:56px;}
+  .hero-text .hero-title{font-size:30px;}
+  .hero-text .hero-sub{font-size:20px;margin-top:36px;}
+  .hero-text .hero-eng{font-size:22px;}
+  .eng-tagline{font-size:28px;}
+  .kr-heading{font-size:23px;}
+  /* 모바일 드롭다운 메뉴 */
+  nav.gnb.open{
+    display:flex;flex-direction:column;align-items:flex-start;gap:0;
+    position:absolute;top:var(--header-h);left:0;right:0;
+    background:#fff;border-bottom:1px solid var(--c-line);padding:8px 24px 16px;
+  }
+  nav.gnb.open .menu{width:100%;padding:14px 0;border-bottom:1px solid var(--c-line);}
+  nav.gnb.open .dropdown .dd-panel{position:static;transform:none;opacity:1;visibility:visible;box-shadow:none;border:0;padding:0 0 8px 12px;}
+}
+</style>
+</head>
+<body>
+
+<!-- ===================== 헤더 ===================== -->
+<header class="site-header">
+  <div class="header-inner">
+    <!-- 로고: 아래 .logo-ph 를 <img src="로고.png" alt="뷰티셀렉션"> 로 교체하세요 -->
+    <a class="logo" href="#top">
+      <span class="logo-ph"><span class="logo-mark"></span>뷰티셀렉션</span>
+    </a>
+
+    <nav class="gnb" id="gnb">
+      <a class="menu" href="#">회사 소개</a>
+      <a class="menu" href="#">일하는 방법</a>
+      <a class="menu" href="#">성장을 위한 지원</a>
+      <div class="dropdown">
+        <span class="menu has-caret">채용 공고</span>
+        <div class="dd-panel">
+          <a href="#">채용 공고</a>
+          <a href="#">인재풀 등록</a>
+        </div>
+      </div>
+      <a class="menu" href="#">뉴스룸</a>
+    </nav>
+
+    <div class="header-actions">
+      <div class="lang">
+        <span class="globe"></span>
+        <span>KR</span>
+        <span class="caret"></span>
+      </div>
+      <button class="nav-toggle" id="navToggle" aria-label="메뉴 열기">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ===================== 메인 - 1 (HERO) ===================== -->
+  <section class="hero">
+    <!-- 배너 이미지: 아래 .img-ph 를 <img src="배너.jpg"> 로 교체 -->
+    <div class="hero-banner">
+      <div class="img-ph">
+        <span class="ph-tag">메인 배너 · 교체 영역</span>
+        <span class="ph-title">이미지 영역</span>
+        <span class="ph-sub">권장 비율 약 1765 × 720 — 이 영역을 이미지로 교체하세요</span>
+      </div>
+    </div>
+
+    <div class="hero-text">
+      <h2 class="hero-title">바이오던스를 만든 팀,<br>뷰티셀렉션을 소개합니다.</h2>
+
+      <p class="hero-sub">세상에 없던 제품을 만들기 위한<br>전략적 선택과 집중.</p>
+      <p class="hero-body">글로벌 시장을 놀라게 한 바이오던스의 성공 뒤엔, 누구보다 본질을 꿰뚫었던 한 팀이 있습니다.<br>그 팀의 이름은 뷰티셀렉션입니다.</p>
+
+      <p class="hero-eng">
+        Reframe the Rule.<br>Own the Future.
+        <span class="kr">기준을 새로 쓰고 미래를 이끕니다.</span>
+      </p>
+    </div>
+  </section>
+
+  <!-- ===================== 섹션 2 ===================== -->
+  <section class="section">
+    <div class="container">
+      <div class="split">
+        <div class="col media">
+          <!-- 이미지 교체 영역 -->
+          <div class="img-ph">
+            <span class="ph-tag">교체 영역</span>
+            <span class="ph-title">이미지 영역</span>
+            <span class="ph-sub">이 영역을 이미지로 교체하세요</span>
+          </div>
+        </div>
+        <div class="col copy">
+          <h3 class="kr-heading">인플루언서 커머스에서 바이오던스까지.</h3>
+          <p class="body-text">미국 Amazon 1위, 일본 Qoo10 1위,<br>올리브영 어워즈 수상, 전세계 89개국 판매,<br>6년간 40배 성장에 이르는 여정.</p>
+          <p class="body-text">시장을 따라가지 않고, 시장의 기준이 됩니다.<br>한국을 넘어 글로벌 뷰티의 새로운 기준을 만들어갑니다.</p>
+          <a class="btn" href="#">우리가 걸어온 길 보기 <span class="arrow"></span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== 섹션 3 ===================== -->
+  <section class="section alt">
+    <div class="container">
+      <div class="split">
+        <div class="col media">
+          <div class="img-ph">
+            <span class="ph-tag">교체 영역</span>
+            <span class="ph-title">이미지 영역</span>
+            <span class="ph-sub">이 영역을 이미지로 교체하세요</span>
+          </div>
+        </div>
+        <div class="col copy">
+          <h3 class="eng-tagline">Selective by Nature.<br>Bold by Choice.</h3>
+          <p class="body-text">뷰티셀렉션은 단지 빠르게 일하지 않습니다.<br>가장 중요한 것에 깊이 몰입하고,<br>선택한 길에서는 누구보다 과감하게 움직입니다.</p>
+          <a class="btn" href="#">일하는 방식 보기 <span class="arrow"></span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== 섹션 4 ===================== -->
+  <section class="section">
+    <div class="container">
+      <div class="split">
+        <div class="col media">
+          <div class="img-ph">
+            <span class="ph-tag">교체 영역</span>
+            <span class="ph-title">이미지 영역</span>
+            <span class="ph-sub">이 영역을 이미지로 교체하세요</span>
+          </div>
+        </div>
+        <div class="col copy">
+          <h3 class="eng-tagline">Deep Divers.<br>Rule Builders.<br>Obsessive Performers.</h3>
+          <p class="body-text">본질을 꿰뚫고,<br>새로운 기준을 만들며,<br>결과로 증명하는 사람.<br>그 사람이 당신이라면, 뷰티셀렉션은 열려 있습니다.</p>
+          <a class="btn" href="#">채용 중인 포지션 <span class="arrow"></span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ===================== 푸터 ===================== -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <!-- 푸터 로고: 아래 .logo-ph 를 이미지로 교체 -->
+      <div class="footer-logo">
+        <span class="logo-ph"><span class="logo-mark"></span>뷰티셀렉션</span>
+      </div>
+      <div class="footer-info">
+        <div class="f-title">©뷰티셀렉션</div>
+        <div class="f-desc">
+          <p>대표 : 박재빈 &nbsp;| &nbsp;사업자등록번호 : 551-81-01715</p>
+          <p>주소 : 서울특별시 강남구 테헤란로 311, 아남타워</p>
+          <p>고객센터 : 1800-5792 &nbsp;| &nbsp;이메일 : contact@beautyselection.co.kr</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-divider"></div>
+
+    <div class="footer-bottom">
+      <a class="footer-menu" href="#">개인정보처리방침 <span class="caret"></span></a>
+      <div class="sns">
+        <a href="#" aria-label="SNS 1">IG</a>
+        <a href="#" aria-label="SNS 2">YT</a>
+        <a href="#" aria-label="SNS 3">in</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- 맨 위로 버튼 -->
+<div class="to-top" id="toTop" aria-label="맨 위로"><span class="up"></span></div>
+
+<script>
+  // 모바일 메뉴 토글
+  var t = document.getElementById('navToggle');
+  var g = document.getElementById('gnb');
+  if (t) t.addEventListener('click', function(){ g.classList.toggle('open'); });
+  // 맨 위로
+  document.getElementById('toTop').addEventListener('click', function(){
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+</script>
+
+</body>
+</html>
